@@ -2,16 +2,16 @@
 A good looking, and functional munchkin calculator!
 
 # Updates
-ALPHA:
+ALPHA
   1.0 - Player Card schematic basics
-      - Combat tray video/audio basics
-      - Proper background and some scaling
-      To be added:
-	-better drawer open sound
-	-buttons to modify values on player card
-	-mute button
-	-create player button
-	-moveable player card
+	  - Combat tray video/audio basics
+    - Proper background and some scaling
+    To be added:
+	  - better drawer open sound
+	  - buttons to modify values on player card
+	  - mute button
+	  - create player button
+	  - moveable player card
 
   1.1 - Moveable player cards added!
 
