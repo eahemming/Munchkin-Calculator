@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Munchkin Calculator</title>
+		<title>Munchkin Calculator Alpha 1.0</title>
 		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<style>
 			h1 {
 				margin:0px;
@@ -24,7 +25,7 @@
 				height:19vw;
 				border:solid rgb(79,29,22);
 				border-width:0.5vw;
-				position:relative;
+				position:absolute;
 				z-index:2;
 				background-color:rgb(255,252,210);
 				color:rgb(79,29,22);
@@ -100,10 +101,10 @@
 				});
 				$('#combat-tray').mouseleave(function() {
 					drawerclose.play();
-				})
+				});
 			</script>
 
-			<div class="player-card">
+			<div class="player-card" id="test">
 				<h1 id="player-power">34</h1>
 				<h1 style="float:left; margin: 0px 0px 0px 5%;font-size:1.3vw">Lv. 6</h1>
 				<h1 id="player-name">Ethan</h1>
@@ -120,6 +121,12 @@
 					<h1 id="">9</h1>
 				</div>
 			</div>
+
+			<script>
+				$( function() {
+					$('#test').draggable();
+				});
+			</script>
 		</div>
 		<!--
 			'Next Turn' button - resets combat changes
