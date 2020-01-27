@@ -1,7 +1,7 @@
 # Munchkin-Calculator
 A good looking, and functional munchkin calculator!
 
-#Updates
+# Updates
 ALPHA:
   1.0 - Player Card schematic basics
       - Combat tray video/audio basics
