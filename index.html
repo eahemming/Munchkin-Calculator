@@ -12,129 +12,142 @@
 				font-family:"Quasimodo";
 				src:url("quasimodo.ttf");
 			}
-			.background {
-				width:100%;height:100%;top:0;left:0;position:absolute;z-index:1;
+			#controls {
+				text-align:center;
 			}
-			.wrapper {
+			#wrapper {
 				font-family:"Quasimodo";
-				top:10%;
+				width:80%;
+				border:.2vw dashed black;
+				border-radius:1vw;
+				position:relative;
+				margin:auto;
+				overflow:hidden;
+			}
+			#app {
+				background-image: url("images/munchkin-logo.png"), url("images/munchkin-background.png");
+				background-size:100% 100%;
+				position:relative;
+				margin:auto;
 				overflow:hidden;
 			}
 			.player-card {
-				width:14vw;
-				height:19vw;
-				border:solid rgb(79,29,22);
-				border-width:0.5vw;
-				position:absolute;
-				z-index:2;
+				width:16%;
+				height:40%;
+				position:relative;
+				text-align:center;
+				float:left;
+
 				background-color:rgb(255,252,210);
 				color:rgb(79,29,22);
+
 				border-radius:8%;
-				font-size:0.6vw;
+				border:solid rgb(79,29,22);
+				border-width:.5vw;
+
+				font-size:1.2vw;
+
+				transition: height;
+			}
+			.player-card-tray {
+				width:8%;
+				height:20%;
+				position:relative;
 				text-align:center;
+				float:left;
+
+				background-color:rgb(255,252,210);
+				color:rgb(79,29,22);
+
+				border-radius:8%;
+				border:solid rgb(79,29,22);
+				border-width:.5vw;
+
+				font-size:1.2vw;
 			}
 			.player-card:hover {
 				background-color:rgb(230,230,190);
 			}
-			#player-power {
-				margin:6% 0px 0px;
-				text-align:center;
-				font-size:2vw;
+			.player-card h1 {
+				font-size:100%;
+				margin:5% 0 0 0;
 			}
-			#player-name {
-				margin:0px;
-				text-align:center;
-				font-size:1.5vw;
+			.player-card h2 {
+				font-size:100%;
+				margin:0;
 			}
-			.player-values {
-				margin:6% 0 0;
+			.player-card div {
+				color:rgb(60,15,18);
 			}
-			.player-values:hover {
-				color:brown;
+
+			#combat-tray img {
+				height:100%;
+				width:100%;
 			}
-			#combat-tray {
-				top:10%;
-				left:97%;
-				max-width:3%;
+			#combat-tray{
+				top:7%;
+				padding:0px;
+				height:86%;
 				overflow:hidden;
 				position:absolute;
-				z-index:1;
 				animation-delay:0.5s;
-				transition:left 1.2s, max-width 1.2s;
+				transition:right 0.5s;
 			}
-			#combat-tray:hover {
-				max-width:36.35%;
-				left:63.65%;
-				animation-delay: 0.5s;
-				transition:left 0.7s, max-width 0.7s;
+			.combat-tray{
+				right:-43%;
+			}
+			#combat-tray:hover{
+				right:0px;
+			}
+			.combat-tray-hover {
+				right:0px;
 			}
 		</style>
 	</head>
-	<body>
-		<img class="background" src="munchkin-background.png">
-		<img class="background" src="munchkin-logo.png">
+	<body style="background-color:#e3c486">
 		<iframe src="drawer.ogg" allow="autoplay" id="audio" style="display:none"></iframe>
-		<div class="wrapper">
 
-			<div id="combat-tray">
-				<img src="combat-tray.png">
+		<audio id="drawer-open">
+			<source src="audio/draweropen.ogg" type="audio/ogg">
+			<source src="audio/draweropen.mp3" type="audio/mp3">
+			Your browser can't play my sweet drawer sounds :(
+		</audio>
+
+		<audio id="drawer-close">
+			<source src="audio/drawerclose.ogg" type="audio/ogg">
+			<source src="audio/drawerclose.mp3" type="audio/mp3">
+			Your browser can't play my sweet drawer sounds :(
+		</audio>
+
+		<template id="card-template">
+			<div id='card' class="player-card">
+				<h1>1</h1>
+				<h1 id="level">Lv.1</h1>
+				<h1 id="name" contenteditable="true">(name)</h1>
+				<h1>Items</h1>
+				<h2 id="item-bonus">0</h2>
+				<h1>Solo Bonus</h1>
+				<h2 id="solo-bonus">0</h2>
+				<h1>One Shots</h1>
+				<h2 id="one-shots">0</h2>
+			</div>
+		</template>
+
+		<div id="wrapper">
+			<div id="controls">
+				<button></button>
+				<button onclick="addPlayer();">Add Player</button>
+				<button></button>
 			</div>
 
-			<audio id="drawer-open">
-				<source src="audio/draweropen.ogg" type="audio/ogg">
-				<source src="audio/draweropen.mp3" type="audio/mp3">
-				Your browser can't play my sweet drawer sounds :(
-			</audio>
-			<audio id="drawer-close">
-				<source src="audio/drawerclose.ogg" type="audio/ogg">
-				<source src="audio/drawerclose.mp3" type="audio/mp3">
-				Your browser can't play my sweet drawer sounds :(
-			</audio>
-
-			<script>
-				var draweropen=document.getElementById("drawer-open");
-				var drawerclose=document.getElementById("drawer-close");
-				document.getElementById("combat-tray").appendChild(draweropen);
-				document.getElementById("combat-tray").appendChild(drawerclose);
-				$('#combat-tray').mouseenter(function() {
-					draweropen.play();
-				});
-				$('#combat-tray').mouseleave(function() {
-					drawerclose.play();
-				});
-			</script>
-
-			<div class="player-card" id="test">
-				<h1 id="player-power">34</h1>
-				<h1 style="float:left; margin: 0px 0px 0px 5%;font-size:1.3vw">Lv. 6</h1>
-				<h1 id="player-name">Ethan</h1>
-				<div class="player-values">
-					<h1>Item Bonuses:</h1>
-					<h1 id="player-items">15</h1>
-				</div>
-				<div class="player-values">
-					<h1>Solo Bonuses:</h1>
-					<h1 id="player-solo">4</h1>
-				</div>
-				<div class="player-values">
-					<h1>Combat Changes</h1>
-					<h1 id="">9</h1>
+			<div id="app">
+				<div id="combat-tray" class="combat-tray">
+					<img id="tray-img" src="combat-tray.png">
 				</div>
 			</div>
-
-			<script>
-				$( function() {
-					$('#test').draggable();
-				});
-			</script>
 		</div>
-		<!--
-			'Next Turn' button - resets combat changes
-			'Add Monster' button - level request popup
-			'Add Player' button - name request popup
-			5:00 turn timer + alarm
-			"Change Turn Order" button
-			Level Trackers - Moveable objects that snap to level 'line plot'
-		-->
+
+		<script src="Card.js"></script>
+		<script src="index.js"></script>
 	</body>
 </html>
